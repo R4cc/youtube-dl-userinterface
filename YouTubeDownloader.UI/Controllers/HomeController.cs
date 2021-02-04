@@ -33,7 +33,7 @@ namespace YouTubeDownloader.UI.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Download(string url, bool audioOnly)
+        public IActionResult Download(string url, string audioOnly)
         {
             var ytdl = new DownloadRepo();
 

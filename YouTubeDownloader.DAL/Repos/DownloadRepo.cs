@@ -13,7 +13,7 @@ namespace YouTubeDownloader.DAL.Repos
             youtubeDl = new YoutubeClient();
         }
 
-        public async void DownloadVideoAsync(string url = "https://www.youtube.com/watch?v=WyPm6p0GnwY", bool audioOnly = false)
+        public async void DownloadVideoAsync(string url = "https://www.youtube.com/watch?v=WyPm6p0GnwY", string audioOnly = "off")
         {
             var video = youtubeDl.Videos.GetAsync(url);
             var title = video.Result.Title;
@@ -22,7 +22,7 @@ namespace YouTubeDownloader.DAL.Repos
             var streamManifest = await youtubeDl.Videos.Streams.GetManifestAsync(id);
             IStreamInfo streamInfo;
 
-            if (audioOnly)
+            if (audioOnly == "on")
             {
                 streamInfo = streamManifest.GetAudioOnly().WithHighestBitrate();
             }

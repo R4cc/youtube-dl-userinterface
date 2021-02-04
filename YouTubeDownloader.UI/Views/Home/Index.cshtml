@@ -11,13 +11,13 @@
 
     <label>Video URL</label>
     <br />
-    <form asp-action="Download">
+    <form method="post" asp-action="Download">
         <p class="aligncenter">
             <input type="text" class="input-form" name="url" placeholder="https://youtube.com/watch?v=..." />
         </p>
         <div class="vertical-center">
             <label class="margin-narrow-right">Audio Only</label>
-            <input type="checkbox" class="margin-wide-right" name="audioOnly">
+            <input type="checkbox" class="margin-wide-right" name="audioOnly" id="audioOnly">
             <button class="btn btn-lg btn-primary ">Download</button>
         </div>
     </form>
