@@ -3,7 +3,7 @@ using YoutubeExplode.Videos.Streams;
 
 namespace YouTubeDownloader.DAL.Repos
 {
-    public class DownloadRepo 
+    public class DownloadRepo
     {
         public string filePath { get; set; }
         private YoutubeClient youtubeDl;
@@ -13,14 +13,24 @@ namespace YouTubeDownloader.DAL.Repos
             youtubeDl = new YoutubeClient();
         }
 
-        public async void DownloadVideoAsync(string url = "https://www.youtube.com/watch?v=WyPm6p0GnwY")
+        public async void DownloadVideoAsync(string url = "https://www.youtube.com/watch?v=WyPm6p0GnwY", bool audioOnly = false)
         {
             var video = youtubeDl.Videos.GetAsync(url);
             var title = video.Result.Title;
             var id = video.Result.Id;
 
             var streamManifest = await youtubeDl.Videos.Streams.GetManifestAsync(id);
-            var streamInfo = streamManifest.GetMuxed().WithHighestVideoQuality();
+            IStreamInfo streamInfo;
+
+            if (audioOnly)
+            {
+                streamInfo = streamManifest.GetAudioOnly().WithHighestBitrate();
+            }
+            else
+            {
+                streamInfo = streamManifest.GetMuxed().WithHighestVideoQuality();
+            }
+
             var filename = $"{title}.mp4";
             filePath = @$".\videoDownloads\{filename}";
 

@@ -4,7 +4,7 @@
 @{
 }
 <div class="aligncenter">
-    <img src=".\Images\Youtube-dl.png" alt="Sample Photo" width="900" />
+    <img src=".\Images\Youtube-dl.png" alt="Youtube-dl logo" width="900" />
 </div>
 
 <div>
@@ -15,7 +15,11 @@
         <p class="aligncenter">
             <input type="text" class="input-form" name="url" placeholder="https://youtube.com/watch?v=..." />
         </p>
-        <button class="btn btn-lg btn-primary float-right">Download</button>
+        <div class="vertical-center">
+            <label class="margin-narrow-right">Audio Only</label>
+            <input type="checkbox" class="margin-wide-right" name="audioOnly">
+            <button class="btn btn-lg btn-primary ">Download</button>
+        </div>
     </form>
 
 </div>
@@ -31,6 +35,7 @@
 
 <style>
     .input-form {
+        font: 400 15px/28px Avenir Next LT Pro,sans-serif;
         display: block;
         max-width: 1200px;
         width: 1110px;
@@ -55,6 +60,7 @@
         width: 200px;
         padding: 11px 32px;
         cursor: pointer;
+        font: 400 15px/28px Avenir Next LT Pro,sans-serif;
         font-size: 15px;
         font-weight: 500;
         border: 1px solid transparent;
@@ -75,6 +81,25 @@
         max-width: 100%;
         margin-bottom: 5px;
         font-weight: 700;
-        font: 700 15px/28px Arial,sans-serif;
+        font: 700 15px/28px Avenir Next LT Pro,sans-serif;
+    }
+</style>
+
+
+<style>
+    .margin-narrow-right {
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+
+    .margin-wide-right {
+        margin-right: 20px;
+    }
+
+    .vertical-center {
+        display: flex;
+        align-items: center;
+        /*vertical-align: center;*/
+        float: right;
     }
 </style>
