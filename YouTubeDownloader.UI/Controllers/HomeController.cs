@@ -3,8 +3,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using YouTubeDownloader.DAL.Repos;
 using YouTubeDownloader.UI.Models;
 
 namespace YouTubeDownloader.UI.Controllers
@@ -31,9 +35,17 @@ namespace YouTubeDownloader.UI.Controllers
 
         public IActionResult Download(string url)
         {
-            var ytdl = new YouTubeDownloader.DAL.YouTubeDlClient.YouTubeDlClient();
+            var ytdl = new DownloadRepo();
 
-            ytdl.DownloadVideo(url);
+            ytdl.DownloadVideoAsync(url);
+
+            //FileInfo file = new FileInfo(filePath);
+            //if (file.Exists)
+            //{
+            //    var wc = new WebClient();
+            //    wc.DownloadFileAsync(filePath);
+            //}
+
             return RedirectToAction("Index");
         }
     }

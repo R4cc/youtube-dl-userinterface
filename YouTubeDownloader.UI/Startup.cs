@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using YouTubeDownloader.DAL.YouTubeDlClient;
+using YouTubeDownloader.DAL.Repos;
 
 namespace YouTubeDownloader.UI
 {
@@ -27,7 +27,7 @@ namespace YouTubeDownloader.UI
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddControllersWithViews();
-            services.AddSingleton<YouTubeDlClient>();
+            services.AddSingleton<DownloadRepo>();
 
         }
 
