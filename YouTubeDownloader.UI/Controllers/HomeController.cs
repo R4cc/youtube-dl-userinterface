@@ -28,5 +28,13 @@ namespace YouTubeDownloader.UI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Download(string url)
+        {
+            var ytdl = new YouTubeDownloader.DAL.YouTubeDlClient.YouTubeDlClient();
+
+            ytdl.DownloadVideo(url);
+            return RedirectToAction("Index");
+        }
     }
 }
