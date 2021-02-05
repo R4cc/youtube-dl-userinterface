@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using YouTubeDownloader.DAL.Repos;
 using YouTubeDownloader.UI.Models;
@@ -39,12 +40,6 @@ namespace YouTubeDownloader.UI.Controllers
 
             ytdl.DownloadVideoAsync(url, audioOnly);
 
-            //FileInfo file = new FileInfo(filePath);
-            //if (file.Exists)
-            //{
-            //    var wc = new WebClient();
-            //    wc.DownloadFileAsync(filePath);
-            //}
 
             return RedirectToAction("Index");
         }

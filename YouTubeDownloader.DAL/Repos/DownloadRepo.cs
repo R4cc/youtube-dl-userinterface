@@ -48,7 +48,7 @@ namespace YouTubeDownloader.DAL.Repos
 
         public async void DownloadPlaylistAsync(string url)
         {
-
+            var playlist = await youtubeDl.Playlists.GetAsync("PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6");
         }
     }
 }
