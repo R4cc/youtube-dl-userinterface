@@ -14,9 +14,10 @@ namespace YouTubeDownloader.UI.Controllers
             return View();
         }
 
-        public IActionResult DownloadPlaylist(string url)
+        public IActionResult DownloadPlaylist(string url, string audioOnly)
         {
             var ytdl = new DownloadRepo();
+            ytdl.DownloadPlaylistAsync(url, audioOnly);
             return RedirectToAction("Index");
         }
     }
