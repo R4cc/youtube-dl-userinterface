@@ -13,7 +13,7 @@ namespace YouTubeDownloader.DAL.Repos
             youtubeDl = new YoutubeClient();
         }
 
-        public async void DownloadVideoAsync(string url = "https://www.youtube.com/watch?v=WyPm6p0GnwY", string audioOnly = "off")
+        public async void DownloadVideoAsync(string url = "", string audioOnly = "off")
         {
             var video = youtubeDl.Videos.GetAsync(url);
             var title = video.Result.Title;
@@ -58,9 +58,8 @@ namespace YouTubeDownloader.DAL.Repos
             // Get all playlist videos
             var playlistVideos = await youtubeDl.Playlists.GetVideosAsync(playlist.Id);
 
+            // Creates directory where videos will be saved
             var path = @$".\videoDownloads\{playlist.Title}";
-
-
             System.IO.Directory.CreateDirectory(path);
 
             foreach (var video in playlistVideos)
@@ -71,11 +70,13 @@ namespace YouTubeDownloader.DAL.Repos
 
                 if (audioOnly == "on")
                 {
+                    // Download Audio
                     streamInfo = streamManifest.GetAudioOnly().WithHighestBitrate();
                     filename = $"{video.Title}.mp3";
                 }
                 else
                 {
+                    // Download Video
                     streamInfo = streamManifest.GetMuxed().WithHighestVideoQuality();
                     filename = $"{video.Title}.mp4";
                 }
