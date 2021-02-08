@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNetCore.Http;
 using YouTubeDownloader.DAL.Repos;
 using YouTubeDownloader.UI.Models;
 
@@ -39,7 +32,6 @@ namespace YouTubeDownloader.UI.Controllers
             var ytdl = new DownloadRepo();
 
             ytdl.DownloadVideoAsync(url, audioOnly);
-
 
             return RedirectToAction("Index");
         }

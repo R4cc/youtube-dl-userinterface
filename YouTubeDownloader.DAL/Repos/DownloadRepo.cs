@@ -5,8 +5,8 @@ namespace YouTubeDownloader.DAL.Repos
 {
     public class DownloadRepo
     {
-        public string filePath { get; set; }
-        private YoutubeClient youtubeDl;
+        public string FilePath { get; set; }
+        private readonly YoutubeClient youtubeDl;
 
         public DownloadRepo()
         {
@@ -34,12 +34,12 @@ namespace YouTubeDownloader.DAL.Repos
                 filename = $"{title}.mp3";
             }
 
-            filePath = @$".\videoDownloads\{filename}";
+            FilePath = @$".\videoDownloads\{filename}";
 
             if (streamInfo != null)
             {
                 // Download the stream to file
-                await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, filePath);
+                await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
             }
         }
 
@@ -81,12 +81,12 @@ namespace YouTubeDownloader.DAL.Repos
                     filename = $"{video.Title}.mp4";
                 }
 
-                filePath = @$"{path}\{filename}";
+                FilePath = @$"{path}\{filename}";
 
                 if (streamInfo != null)
                 {
                     // Download the stream to file
-                    await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, filePath);
+                    await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
                 }
             }
         }
