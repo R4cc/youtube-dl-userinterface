@@ -6,20 +6,20 @@ namespace YouTubeDownloader.DAL.Repos
     public class DownloadRepo
     {
         public string FilePath { get; set; }
-        private readonly YoutubeClient youtubeDl;
+        private readonly YoutubeClient _youtubeDl;
 
         public DownloadRepo()
         {
-            youtubeDl = new YoutubeClient();
+            _youtubeDl = new YoutubeClient();
         }
 
         public async void DownloadVideoAsync(string url = "", string audioOnly = "off")
         {
-            var video = youtubeDl.Videos.GetAsync(url);
+            var video = _youtubeDl.Videos.GetAsync(url);
             var title = video.Result.Title;
             var id = video.Result.Id;
 
-            var streamManifest = await youtubeDl.Videos.Streams.GetManifestAsync(id);
+            var streamManifest = await _youtubeDl.Videos.Streams.GetManifestAsync(id);
             string filename;
             IStreamInfo streamInfo;
 
@@ -39,7 +39,7 @@ namespace YouTubeDownloader.DAL.Repos
             if (streamInfo != null)
             {
                 // Download the stream to file
-                await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
+                await _youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
             }
         }
 
@@ -53,10 +53,10 @@ namespace YouTubeDownloader.DAL.Repos
             }
 
             // Get playlist metadata
-            var playlist = await youtubeDl.Playlists.GetAsync(playlistId);
+            var playlist = await _youtubeDl.Playlists.GetAsync(playlistId);
 
             // Get all playlist videos
-            var playlistVideos = await youtubeDl.Playlists.GetVideosAsync(playlist.Id);
+            var playlistVideos = await _youtubeDl.Playlists.GetVideosAsync(playlist.Id);
 
             // Creates directory where videos will be saved
             var path = @$".\videoDownloads\{playlist.Title}";
@@ -64,7 +64,7 @@ namespace YouTubeDownloader.DAL.Repos
 
             foreach (var video in playlistVideos)
             {
-                var streamManifest = await youtubeDl.Videos.Streams.GetManifestAsync(video.Id);
+                var streamManifest = await _youtubeDl.Videos.Streams.GetManifestAsync(video.Id);
                 string filename;
                 IStreamInfo streamInfo;
 
@@ -86,7 +86,7 @@ namespace YouTubeDownloader.DAL.Repos
                 if (streamInfo != null)
                 {
                     // Download the stream to file
-                    await youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
+                    await _youtubeDl.Videos.Streams.DownloadAsync(streamInfo, FilePath);
                 }
             }
         }

@@ -30,7 +30,7 @@ namespace YouTubeDownloader.UI.Controllers
         public IActionResult Download(string url, string audioOnly)
         {
             var ytdl = new DownloadRepo();
-
+            
             ytdl.DownloadVideoAsync(url, audioOnly);
 
             return RedirectToAction("Index");
