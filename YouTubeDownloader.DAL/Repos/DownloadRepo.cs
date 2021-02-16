@@ -1,4 +1,5 @@
-﻿using YoutubeExplode;
+﻿using System;
+using YoutubeExplode;
 using YoutubeExplode.Videos.Streams;
 
 namespace YouTubeDownloader.DAL.Repos
@@ -15,6 +16,9 @@ namespace YouTubeDownloader.DAL.Repos
 
         public async void DownloadVideoAsync(string url = "", string audioOnly = "off")
         {
+            if (string.IsNullOrEmpty(url))
+                return;
+
             var video = _youtubeDl.Videos.GetAsync(url);
             var title = video.Result.Title;
             var id = video.Result.Id;
@@ -50,6 +54,10 @@ namespace YouTubeDownloader.DAL.Repos
             if (playlistId.Contains("&index="))
             {
                 playlistId = playlistId.Remove(34, playlistId.Length - 34);
+            }
+            else
+            {
+                return;
             }
 
             // Get playlist metadata
